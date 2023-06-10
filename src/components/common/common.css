@@ -1,0 +1,19 @@
+.popupContainer {
+    /* Other styles for the container */
+  
+    /* Scrollbar styles */
+    overflow-y: scroll;
+    scrollbar-width: thin;
+  }
+  
+  .popupContainer::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .popupContainer::-webkit-scrollbar-thumb {
+    background-color: gray;
+  }
+  
+  .popupContainer::-webkit-scrollbar-thumb:hover {
+    background-color: darkgray;
+  }

@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import { BrowserRouter as Router, Switch, Route, Routes } from 'react-router-dom';
+import Navbar from './components/common/Navbar'
+import Home from './pages/Home'
+import Footer from './components/common/Footer'
+import GenresPage from './pages/GenresPage';
+import AnimeDetailPage from './pages/AnimeDetailPage';
 
-function App() {
+const App = () => {
+
+  const [activeWebsite, setActiveWebsite] = useState('anime');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+        <Router>
+        <Navbar activeWebsite={activeWebsite} setActiveWebsite={setActiveWebsite}  />
+        <Routes>
+        <Route exact path='/' element={< Home activeWebsite={activeWebsite} />}/>
+        <Route path='/genres/:genre' element={<GenresPage activeWebsite={activeWebsite} />} />
+        <Route exact path="/details/:mal_id" element={<AnimeDetailPage activeWebsite={activeWebsite} />} />
+        </Routes>
+        <Footer />
+      </Router>
+  )
 }
 
-export default App;
+export default App
