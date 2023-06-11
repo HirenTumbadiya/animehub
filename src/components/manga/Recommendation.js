@@ -5,6 +5,9 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
 
 const Recommendation = ({ recommendationManga }) => {
+  if (!recommendationManga) {
+    return <div>Loading...</div>; // or any placeholder/loading component
+  }
 
     const sliderSettings = {
         dots: false,
