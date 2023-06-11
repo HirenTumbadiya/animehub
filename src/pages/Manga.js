@@ -14,19 +14,42 @@ const Manga = () => {
   const [upcomingManga, setUpcomingManga] = useState([]);
   const [latestManga, setLatestManga] = useState([]);
   const [recommendationManga, setRecommendationManga] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch upcoming anime
-        const upcomingMangaResponse = await axios.get('https://api.jikan.moe/v4/top/manga?filter=upcoming');
-        const latestMangaResponse = await axios.get('https://api.jikan.moe/v4/top/manga?filter=bypopularity');
-        const RecommendationMangaResponse = await axios.get('https://api.jikan.moe/v4/top/manga?filter=recommendation');
-        setUpcomingManga(upcomingMangaResponse.data.data);
-        setLatestManga(latestMangaResponse.data.data)
-        setRecommendationManga(RecommendationMangaResponse.data.data)
+        const upcomingMangaResponse = await axios.get(
+          'https://api.jikan.moe/v4/top/manga?filter=upcoming'
+        );
+        const latestMangaResponse = await axios.get(
+          'https://api.jikan.moe/v4/top/manga?filter=bypopularity'
+        );
+        const recommendationMangaResponse = await axios.get(
+          'https://api.jikan.moe/v4/top/manga?filter=recommendation'
+        );
+
+        if (upcomingMangaResponse.status === 200) {
+          setUpcomingManga(upcomingMangaResponse.data.data);
+        } else {
+          setError('Error fetching upcoming manga: ' + upcomingMangaResponse.statusText);
+
+        }
+
+        if (latestMangaResponse.status === 200) {
+          setLatestManga(latestMangaResponse.data.data);
+        } else {
+          setError('Error fetching latest manga');
+        }
+
+        if (recommendationMangaResponse.status === 200) {
+          setRecommendationManga(recommendationMangaResponse.data.data);
+        } else {
+          setError('Error fetching recommendation manga');
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
+        setError('Error fetching data');
       }
     };
 
@@ -34,20 +57,21 @@ const Manga = () => {
   }, []);
 
   return (
-<div className='bg-black'>
-        <MangaImage/>
-    <div className=' mx-16 text-slate-300'>
+    <div className='bg-black'>
+      <MangaImage />
+      <div className='mx-16 text-slate-300'>
         <UpcomingManga upcomingManga={upcomingManga} />
-    </div>
-    <div className=' mx-16 text-slate-300'>
+      </div>
+      <div className='mx-16 text-slate-300'>
         <LatestManga latestManga={latestManga} />
-    </div>
-    <div className=' mx-16 text-slate-300'>
+      </div>
+      <div className='mx-16 text-slate-300'>
         <Update />
-    </div>
-    <div className=' mx-16 text-slate-300'>
+      </div>
+      <div className='mx-16 text-slate-300'>
         <Recommendation recommendationManga={recommendationManga} />
-    </div>
+      </div>
+      {error && <div>{error}</div>}
     </div>
   );
 };

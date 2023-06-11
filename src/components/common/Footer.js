@@ -24,7 +24,7 @@ const Footer = () => {
                 <li className='bg-gray-900 rounded-full my-1 py-2 px-4'><a href='#'>Copyright</a></li>
             </ul>
           </div>
-          <p className="text-center rounded-2xl bg-gray-900 py-2 px-4">&copy; 2023 Anime Website. All rights reserved.</p>
+          <p className="text-center rounded-2xl bg-gray-900 py-2 px-4">&copy; 2023 Animehub & jikan. All rights reserved.</p>
         </div>
       </div>
       {/* <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900 opacity-70"></div> */}

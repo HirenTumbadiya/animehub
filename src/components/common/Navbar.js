@@ -106,8 +106,8 @@ const Navbar = ({ activeWebsite, setActiveWebsite }) => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <span className="md:block hidden text-red-600 font-bold text-2xl">AnimeHub</span>
-              <span className=" font-bold text-2xl md:hidden block text-red-600">A</span>
+              <Link to="/" className="md:block hidden text-red-600 font-bold text-2xl">AnimeHub</Link>
+              <Link to="/" className=" font-bold text-2xl md:hidden block text-red-600">A</Link>
             </div>
             <div className="hidden md:block">
               <ul className="ml-10 flex items-baseline space-x-4">

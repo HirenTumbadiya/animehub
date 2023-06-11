@@ -23,7 +23,13 @@ const Home = () => {
         setLatestAnime(latestAnimeResponse.data.data)
         setRecommendationAnime(recommendationAnimeResponse.data.data)
       } catch (error) {
-        console.error('Error fetching data:', error);
+        if (error.response && error.response.status === 429) {
+          // Retry after a delay
+          await new Promise(resolve => setTimeout(resolve, 20000)); // Wait for 1 second
+          fetchData(); // Retry the request
+        } else {
+          console.error('Error fetching data:', error);
+        }
       }
     };
 
